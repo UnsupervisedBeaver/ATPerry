@@ -46,6 +46,8 @@ fn main() -> ! {
 
     let mut usb = UsbSerialJtag::new(peripherals.USB_DEVICE);
 
+    let mut must_clear: bool = false;
+
     menu();
 
     let mut buffer: heapless::String<64> = heapless::String::new();
@@ -57,6 +59,7 @@ fn main() -> ! {
                 let line = buffer.as_str().trim();
                 if line.is_empty() {
                     menu();
+                    must_clear = false;
                     continue;
                 }
 
@@ -73,17 +76,22 @@ fn main() -> ! {
 
                 buffer.clear();
                 println!("ENTER to continue");
+                must_clear = true;
             }
 
             Ok(0x08) | Ok(0x7F) => {
-                if buffer.pop().is_some() {
-                    display_input(buffer.as_str());
+                if !must_clear {
+                    if buffer.pop().is_some() {
+                        display_input(buffer.as_str());
+                    }
                 }
             }
 
             Ok(c) if c.is_ascii_graphic() => {
-                if buffer.push(c as char).is_ok() {
-                    display_input(buffer.as_str());
+                if !must_clear {
+                    if buffer.push(c as char).is_ok() {
+                        display_input(buffer.as_str());
+                    }
                 }
             }
 

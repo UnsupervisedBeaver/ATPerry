@@ -4,9 +4,15 @@ name         = "test_bench"
 rust-version = "1.88"
 version      = "0.1.0"
 
+[lib]
+test = false
+bench = false
+
 [[bin]]
 name = "test_bench"
 path = "./src/bin/main.rs"
+test = false
+bench = false
 
 [dependencies]
 esp-hal = { version = "~1.0", features = ["esp32c6","unstable"] }
