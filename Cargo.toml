@@ -19,12 +19,10 @@ esp-hal = { version = "~1.0", features = ["esp32c6","unstable"] }
 
 esp-bootloader-esp-idf = { version = "0.4.0", features = ["esp32c6"] }
 
-critical-section = "1.2.0"
 esp-println = { version = "0.17.0", features = ["esp32c6"] }
 heapless = "0.9.3"
+embedded-io = "0.6.1"
 
-[unstable]
-build-std = ["alloc", "core"]
 
 [profile.dev]
 # Rust debug is too slow.
