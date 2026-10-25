@@ -11,7 +11,7 @@ use esp_hal::Blocking;
 use esp_println::{print, println};
 
 /// (id, label, command, timeout in ms)
-const COMMANDS: [(&str, &str, &str, u64); 14] = [
+const COMMANDS: [(&str, &str, &str, u64); 16] = [
     ("1", "Basic check", "AT", 1000),
     ("2", "Model / firmware", "ATI", 2000),
     ("3", "Model Name", "AT+CGMM",2000),
@@ -26,6 +26,8 @@ const COMMANDS: [(&str, &str, &str, u64); 14] = [
     ("12", "GNSS power on", "AT+CGNSPWR=1", 3000),
     ("13", "GNSS position", "AT+CGNSINF", 5000),
     ("14", "Disable echo", "ATE0", 1000),
+    ("15", "Use LTE-M", "AT+CMNB=1", 2000),
+    ("16", "Use NB-IOT", "AT+CMNB=2", 2000),
 ];
 
 const BAUDS: [u32; 3] = [115_200, 9_600, 57_600]; // TODO: Check the baud rate and clean at UART declaration
